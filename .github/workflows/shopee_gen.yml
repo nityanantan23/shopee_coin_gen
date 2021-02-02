@@ -1,0 +1,33 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Shopee gen
+
+on:
+  schedule:
+  - cron: '0 1/12 * * *'
+  watch:
+    types: [started]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+ 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+
+    - name: Install dependencies
+      run: node
+    - run: yarn
+    
+    - name: Install dependencies
+      run: yarn add axios
+    
+    - run: node ./src/cron/checkin.js
+    # - run: node ./src/cron/live.js
+    # - run: node ./src/cron/luckydraw.js
+    - run: node ./src/cron/water.js
