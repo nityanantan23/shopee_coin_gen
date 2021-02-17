@@ -51,7 +51,7 @@ const display = ({ state, exp, name, totExp }) => {
           console.log(water);
 
           if (water.code === 0) {
-            logger.info(`${name} menyiram ${water.data.useNumber} air`);
+            logger.info(`${name} pour ${water.data.useNumber} water`);
           }
         }
 

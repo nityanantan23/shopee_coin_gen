@@ -14,7 +14,7 @@ const baseUrl = {
 const userAgent = "Shopee%20Android%20Beeshop%20locale%2Fen%20version%3D436%20appver%3D26606";
 const cropId = 389;
 const appId = "p79q05KxE5YsOCCPP0";
-const boardGameId = "58782b068eee6cfd";
+const boardGameId = "69ae7a837759faed";
 const shopee_app_version = 26606;
 const shopee_rn_version = 1611909827;
 

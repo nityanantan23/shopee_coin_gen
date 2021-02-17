@@ -85,7 +85,7 @@ const claimStatus = ({ token, uid, sessId }) => {
       headers: { Cookie: cookies.join(";") },
     })
     .then((res) => res.data)
-    .catch((err) => err.response.data);
+    .catch((err) =>err.response.data );
 };
 
 const lockCoin = ({ uid, sessId, token, userAgent }) => {

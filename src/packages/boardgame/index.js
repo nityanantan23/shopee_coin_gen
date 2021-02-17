@@ -12,7 +12,7 @@ const roll = ({ eventId, rollId, token, userId, deviceId, shopeeToken }) => {
       {
         headers: {
           Cookie: cookies.join(";"),
-          "x-tenant": "id",
+          "x-tenant": "my",
           "x-user-id": userId,
           "x-device-id": deviceId,
         },
@@ -36,7 +36,7 @@ const rollStatus = ({
     .get(`${baseUrl}/api/boardgame-be/v2/events/${eventId}/state/${rollId}`, {
       headers: {
         Cookie: cookies.join(";"),
-        "x-tenant": "id",
+        "x-tenant": "my",
         "x-user-id": userId,
         "x-device-id": deviceId,
       },

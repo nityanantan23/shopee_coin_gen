@@ -33,6 +33,7 @@ const sleep = (ms) => {
       };
 
       const streams = await live.getLivestreams(options);
+      console.log(streams);
       if (streams.err_code === 0 && streams.data.list.length > 0) {
         let max = 0;
         const paidStreams = streams.data.list.filter((str) => {
@@ -42,6 +43,7 @@ const sleep = (ms) => {
             return true;
           }
         });
+        // console.log(paidStreams);
         const stream = paidStreams[paidStreams.length - 1];
 
         if (stream) {
@@ -50,12 +52,14 @@ const sleep = (ms) => {
             token,
             sessId: stream.item_id,
           });
+          // console.log(claimStatus);
 
           const joinStream = await live.joinStream({
             sessId: stream.item_id,
             token,
             deviceId,
           });
+          // console.log(joinStream);
 
           if (claimStatus.data.claim_times_left > 0) {
             await live.lockCoin({
@@ -89,20 +93,28 @@ const sleep = (ms) => {
               token,
               sessId: stream.item_id,
             });
+            // console.log("cclaim " + cclaim);
+
             if (cclaim.err_code === 0) {
               const claim = await live.claimCoin({
                 token,
                 uid: stream.item.uid,
                 sessId: stream.item_id,
               });
+              // console.log("claim " + claim);
+
               if (claim.err_code === 0) {
                 logger.info(
                   `${name} mendapakan ${claimStatus.data.coins_per_claim} koin`
                 );
               }
             } else {
+              console.log("error " + error);
+
               logger.error;
             }
+          } else {
+            console.log("error claim status is 0");
           }
         }
       }

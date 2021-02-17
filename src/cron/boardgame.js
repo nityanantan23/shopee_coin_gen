@@ -10,7 +10,7 @@ const logger = require("../utils/logger");
     const raw = fs.readFileSync("credentials.json");
     const credentials = JSON.parse(raw);
 
-    const rollId = 10958;
+    const rollId = 28484;
 
     for (let i = 0; i < credentials.length; i++) {
       const { userId, deviceId, shopeeToken, name } = credentials[i];
@@ -33,20 +33,27 @@ const logger = require("../utils/logger");
         deviceId,
       });
 
+      
+
       if (rollStatus.data && rollStatus.data.token.remaining > 0) {
         const roll = await boardgame.roll({
-          eventId,
+          eventId: boardGameId,
           rollId,
           token,
           userId,
           deviceId,
           shopeeToken,
         });
+
+        console.log(roll);
+
         if (roll.data && roll.data.step_action === "PLUS_POINT") {
           logger.info(
-            `${name} mendapatkan ${roll.data.step_info.point_earned} Poin`
+            `${name} gets ${roll.data.step_info.point_earned} Points`
           );
         }
+      } else {
+        console.log("roll status is 0");
       }
     }
   } catch (err) {
