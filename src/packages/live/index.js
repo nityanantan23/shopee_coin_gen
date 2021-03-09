@@ -14,6 +14,8 @@ const getLivestreams = ({ token, ...query }) => {
     .catch((err) => err.response.data);
 };
 
+console.log(getLivestreams);
+
 const reportPB = ({ token, data }) => {
   const cookies = [`SPC_EC=${token}`];
 
@@ -85,7 +87,7 @@ const claimStatus = ({ token, uid, sessId }) => {
       headers: { Cookie: cookies.join(";") },
     })
     .then((res) => res.data)
-    .catch((err) =>err.response.data );
+    .catch((err) => err.response.data);
 };
 
 const lockCoin = ({ uid, sessId, token, userAgent }) => {

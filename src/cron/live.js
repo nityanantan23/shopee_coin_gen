@@ -1,5 +1,6 @@
 const fs = require("fs");
 const FormData = require("form-data");
+const account = require("../packages/account");
 
 const live = require("../packages/live");
 const logger = require("../utils/logger");
@@ -17,23 +18,28 @@ const sleep = (ms) => {
     const credentials = JSON.parse(raw);
 
     for (let i = 0; i < credentials.length; i++) {
-      const { token, deviceId, name } = credentials[i];
+      const { userId, shopeeToken, deviceId, name } = credentials[i];
 
       const dt = new Date();
       const ts = dt.getTime();
 
+      const token = await account.getFeatureToggles({
+        shopeeToken,
+        userAgent,
+        userId,
+      });
+
       const options = {
         offset: 0,
-        limit: 10,
-        tab_type: 1,
-        tab_id: 592037541125632,
+        limit: 50,
+        tab_type: 0,
+        tab_id: 1224868080340480,
         device_id: deviceId,
         ctx_id: `${deviceId}-${ts}-79`,
-        token,
       };
 
       const streams = await live.getLivestreams(options);
-      console.log(streams);
+      console.log(streams.data.list);
       if (streams.err_code === 0 && streams.data.list.length > 0) {
         let max = 0;
         const paidStreams = streams.data.list.filter((str) => {
@@ -46,13 +52,15 @@ const sleep = (ms) => {
         // console.log(paidStreams);
         const stream = paidStreams[paidStreams.length - 1];
 
+        console.log(stream);
+
         if (stream) {
           const claimStatus = await live.claimStatus({
             uid: stream.item.uid,
             token,
             sessId: stream.item_id,
           });
-          // console.log(claimStatus);
+          console.log(claimStatus);
 
           const joinStream = await live.joinStream({
             sessId: stream.item_id,
@@ -105,7 +113,7 @@ const sleep = (ms) => {
 
               if (claim.err_code === 0) {
                 logger.info(
-                  `${name} mendapakan ${claimStatus.data.coins_per_claim} koin`
+                  `${name} gets ${claimStatus.data.coins_per_claim} coins`
                 );
               }
             } else {
