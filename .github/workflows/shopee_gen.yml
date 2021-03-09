@@ -5,7 +5,7 @@ name: Shopee gen
 
 on:
   schedule:
-  - cron: '0 1/12 * * *'
+  - cron: '0 */4 * * *'
   watch:
     types: [started]
 
