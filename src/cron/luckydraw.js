@@ -26,8 +26,10 @@ const fs = require("fs");
         shopeeToken,
       });
       // Cek token
-      const activityId = await luckydraw.getDailyPrize();
-      const appId = "E9VFyxwmtgjnCR8uhL";
+      const activityId = await luckydraw.getDailyPrize(token);
+      const appId = await luckydraw.getAppID(token);
+
+      console.log(appId);
 
       const activity = await luckydraw.getActivity({
         appId,
@@ -35,38 +37,35 @@ const fs = require("fs");
         token,
       });
 
-      console.log(activity);
-      // const access = await luckydraw.access({ activityId, token });
+      // console.log(activity);
+      const access = await luckydraw.access({ activityId, token });
 
       const eventId = activity.data.basic.event_code;
       const chanceId = activity.data.modules[0].module_id;
 
-      const requestId = `${userId}52057634`;
-      // console.log(requestId);
-      // console.log(eventId);
-      // console.log(activityId);
+      const requestId = `${userId}62422112`;
+      console.log(requestId);
+      console.log(appId);
+      console.log(activityId);
 
-      const chances = await luckydraw.chances({
+      // const chances = await luckydraw.chances({
+      //   token,
+      //   eventId,
+      //   chanceId,
+      //   appId,
+      // });
+
+      const claim = await luckydraw.claim({
         token,
         eventId,
-        chanceId,
         appId,
+        activityId,
+        requestId,
       });
 
-      // console.log(chances);
-
-      if (chances.data.daily_chance > 0) {
-        // Claim hadiah
-        const claim = await luckydraw.claim({
-          token,
-          eventId,
-          appId,
-          activityId,
-          requestId,
-        });
-        if (claim.data && claim.data.prize_type === 2) {
-          logger.info(`${name} mendapatkan ${claim.data.package_name}`);
-        }
+      console.log(claim);
+      if (claim.data && claim.data.prize_type === 2) {
+        logger.info(`${name} gets ${claim.data.package_name}`);
       }
     }
   } catch (err) {

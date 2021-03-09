@@ -29,7 +29,7 @@ jobs:
     
     - run: node ./src/cron/checkin.js
     - run: node ./src/cron/live.js
-    # - run: node ./src/cron/luckydraw.js
+    - run: node ./src/cron/luckydraw.js
     - run: node ./src/cron/water.js
     - run: node ./src/cron/boardgame.js
 

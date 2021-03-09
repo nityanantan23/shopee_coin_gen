@@ -27,7 +27,7 @@ const claim = ({ eventId, token, appId, requestId, activityId }) => {
 
 const chances = ({ token, chanceId, eventId, appId }) => {
   const cookies = [`SPC_EC=${token}`];
-
+ 
   const query = {
     appid: appId,
     basic: false,
@@ -68,15 +68,55 @@ const getActivity = ({ activityId, token, appId }) => {
     .catch((err) => err.response.data);
 };
 
-const getDailyPrize = () => {
+const getDailyPrize = (token) => {
+  const cookies = [`SPC_EC=${token}`];
+
   return axios
-    .get(`${baseUrl.main}/Daily-Prize`, { maxRedirects: 2 })
+    .get(`${baseUrl.games}/gameplatform/api/v1/page/favorite_games`, {
+      headers: { Cookie: cookies.join(";") },
+    })
     .then((res) => {
-      const arr = res.request.path.split("?");
-      return arr[0].split("/")[4];
+      for (let index = 0; index < res.data.data.game_infos.length; index++) {
+        if ((res.data.data.game_infos[index].app_name === "luckybox")) {
+          const activityId = res.data.data.game_infos[index].link_url;
+          // console.log(activityId.split("/")[6]);
+          return activityId.split("/")[6];
+        }
+      }
+      
     })
     .catch((err) => err.response);
 };
+
+
+const getAppID = (token) => {
+  const cookies = [`SPC_EC=${token}`];
+
+  return axios
+    .get(`${baseUrl.games}/gameplatform/api/v1/page/favorite_games`, {
+      headers: { Cookie: cookies.join(";") },
+    })
+    .then((res) => {
+      for (let index = 0; index < res.data.data.game_infos.length; index++) {
+        if ((res.data.data.game_infos[index].app_name === "luckybox")) {
+          const AppID = res.data.data.game_infos[index].app_id;
+          return AppID;
+        }
+      }
+      
+    })
+    .catch((err) => err.response);
+};
+
+// const getDailyPrize = () => {
+//   return axios
+//     .get(`${baseUrl.main}/Daily-Prize`, { maxRedirects: 2 })
+//     .then((res) => {
+//       const arr = res.request.path.split("?");
+//       return arr[0].split("/")[4];
+//     })
+//     .catch((err) => err.response);
+// };
 
 const access = ({ activityId, token }) => {
   const cookies = [`SPC_EC=${token}`];
@@ -94,4 +134,4 @@ const access = ({ activityId, token }) => {
     .catch((err) => err.response.data);
 };
 
-module.exports = { claim, chances, getActivity, getDailyPrize, access };
+module.exports = { claim, chances, getActivity, getDailyPrize, access, getAppID };
