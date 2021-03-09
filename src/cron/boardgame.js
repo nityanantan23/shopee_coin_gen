@@ -2,15 +2,15 @@ const fs = require("fs");
 const boardgame = require("../packages/boardgame");
 const account = require("../packages/account");
 const { userAgent, boardGameId } = require("../config");
-
+const purchase = require("../packages/purchase");
 const logger = require("../utils/logger");
 
 (async () => {
   try {
     const raw = fs.readFileSync("credentials.json");
     const credentials = JSON.parse(raw);
-
-    const rollId = 28484;
+    const csrftoken = await purchase.getcsrf();
+    const rollId = 31757;
 
     for (let i = 0; i < credentials.length; i++) {
       const { userId, deviceId, shopeeToken, name } = credentials[i];
@@ -33,8 +33,6 @@ const logger = require("../utils/logger");
         deviceId,
       });
 
-      
-
       if (rollStatus.data && rollStatus.data.token.remaining > 0) {
         const roll = await boardgame.roll({
           eventId: boardGameId,
@@ -43,6 +41,7 @@ const logger = require("../utils/logger");
           userId,
           deviceId,
           shopeeToken,
+          csrftoken,
         });
 
         console.log(roll);

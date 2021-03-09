@@ -35,6 +35,7 @@ const fs = require("fs");
         token,
       });
 
+      console.log(activity);
       // const access = await luckydraw.access({ activityId, token });
 
       const eventId = activity.data.basic.event_code;

@@ -19,7 +19,15 @@ const refresh = ({ shopeeToken, userAgent }) => {
 
 const getUserInfo = () => {};
 
-const getFeatureToggles = ({ userId, userAgent, shopeeToken, language,shopee_rn_version,name,shopee_app_version }) => {
+const getFeatureToggles = ({
+  userId,
+  userAgent,
+  shopeeToken,
+  language,
+  shopee_rn_version,
+  name,
+  shopee_app_version,
+}) => {
   const cookies = [
     `UA=${userAgent}`,
     `shopee_token=${shopeeToken}`,
@@ -29,20 +37,6 @@ const getFeatureToggles = ({ userId, userAgent, shopeeToken, language,shopee_rn_
     `username=${name}`,
     `shopee_rn_version=${shopee_rn_version}`,
   ];
-
-
-
-  // const query = {
-  //   bundle: "trending_searches_new",
-  //   limit: 20,
-  //   offset: 0,
-  // };
-
-  // console.log("query= " + query);
-
-  // const url = `${baseUrl.mall}/api/v2/get_feature_toggles?${qs.stringify(
-  //   query
-  // )}`;
 
   const url = `${baseUrl.mall}/api/v2/coin/get_user_coins`;
 
