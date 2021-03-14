@@ -48,7 +48,7 @@ const display = ({ state, exp, name, totExp }) => {
             cropId: currCrop.id,
             resourceId: currResource.id,
           });
-          console.log(water);
+          // console.log(water);
 
           if (water.code === 0) {
             logger.info(`${name} pour ${water.data.useNumber} water`);
@@ -103,6 +103,8 @@ const display = ({ state, exp, name, totExp }) => {
 
         const myNewCrop = await tanam.getMyCrop({ token });
 
+        // console.log(myNewCrop.data.crops[0]);
+
         if (myNewCrop.code === 0) {
           const currCrop = myNewCrop.data.crops[0];
           // Check crop state
@@ -119,6 +121,8 @@ const display = ({ state, exp, name, totExp }) => {
               cropId: currCrop.id,
             });
 
+            // console.log(harvest);
+
             if (harvest.code === 0) {
               const reward = harvest.data.reward.rewardItems[0].num;
 
@@ -126,9 +130,11 @@ const display = ({ state, exp, name, totExp }) => {
             }
             // Get all available crop
             const crops = await tanam.getCrop({ token });
-            const nCrop = crops.data.cropMetas.filter(
-              (crop) => crop.id === cropId
-            )[0];
+            // console.log(crops.data.cropMetas[0].id);
+
+            const nCrop = crops.data.cropMetas[0];
+
+            // console.log(`crop = ${ncrop}`);
 
             // Tanam crop
             const plant = await tanam.createCrop({ id: nCrop.id, token });
