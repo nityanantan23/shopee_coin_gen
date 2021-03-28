@@ -6,6 +6,7 @@ const {
   shopee_app_version,
   shopee_rn_version,
 } = require("../config");
+require("dotenv").config();
 
 const fs = require("fs");
 
@@ -13,30 +14,28 @@ const fs = require("fs");
 
 (async () => {
   try {
-    const raw = fs.readFileSync("./credentials.json");
-    const credentials = JSON.parse(raw);
+    const userId = process.env.USER_ID;
+    const language = process.env.LANGUAGE;
+    const shopeeToken = process.env.SHOPEE_TOKEN;
+    const name = process.env.NAME;
 
-    for (let i = 0; i < credentials.length; i++) {
-      const { shopeeToken, name, userId, language } = credentials[i];
-      const token = await account.getFeatureToggles({
-        shopeeToken,
-        userAgent,
-        userId,
-        language,
-        shopee_app_version,
-        shopee_rn_version,
-      });
+    const token = await account.getFeatureToggles({
+      shopeeToken,
+      userAgent,
+      userId,
+      language,
+      shopee_app_version,
+      shopee_rn_version,
+    });
 
-      const checkin = await coins.checkin({ token });
+    const checkin = await coins.checkin({ token });
 
-      console.log(checkin);
+    console.log(checkin);
 
-      if (checkin.code === 0 && checkin.data.success) {
-        logger.info(`${name} get ${checkin.data.increase_coins} coin`);
-      } else {
-        logger.error(`failed`);
-        
-      }
+    if (checkin.code === 0 && checkin.data.success) {
+      logger.info(`${name} get ${checkin.data.increase_coins} coin`);
+    } else {
+      logger.error(`failed`);
     }
   } catch (err) {
     console.log(err);
