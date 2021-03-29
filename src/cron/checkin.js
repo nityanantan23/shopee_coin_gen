@@ -8,8 +8,6 @@ const {
 } = require("../config");
 require("dotenv").config();
 
-const fs = require("fs");
-
 //  5, 10,  15, 20, 25, 30, 150 = 255/w = 1020/m
 
 (async () => {
