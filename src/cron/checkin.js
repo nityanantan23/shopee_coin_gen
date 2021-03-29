@@ -19,6 +19,8 @@ const fs = require("fs");
     const shopeeToken = process.env.SHOPEE_TOKEN;
     const name = process.env.NAME;
 
+    console.log(name);
+
     const token = await account.getFeatureToggles({
       shopeeToken,
       userAgent,
