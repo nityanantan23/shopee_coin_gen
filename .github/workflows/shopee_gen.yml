@@ -3,6 +3,9 @@
 
 name: Shopee gen
 
+id: dotenv
+uses: ./.github/actions/dotenv-action
+
 on:
   schedule:
   - cron: '0 */2 * * *'
