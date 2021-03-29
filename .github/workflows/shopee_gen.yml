@@ -3,48 +3,42 @@
 
 name: Shopee gen
 
-
 on:
   schedule:
-  - cron: '0 */2 * * *'
+    - cron: "0 */2 * * *"
   watch:
     types: [started]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
- 
     steps:
-      
-    - name: Run Action
-          uses: ./
-          env:
-            NAME: ${{ secrets.NAME }} 
-            TOKEN: ${{ secrets.TOKEN }} 
-            SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }} 
-            DEVICE_ID: ${{ secrets.DEVICE_ID }} 
-            USER_ID: ${{ secrets.USER_ID }} 
-            LANGUAGE: ${{ secrets.LANGUAGE }} 
-            U_TOKEN: ${{ secrets.U_TOKEN }} 
-            HELP: ${{ secrets.HELP }} 
+      - name: Run Action
+        uses: ./
+        env:
+          NAME: ${{ secrets.NAME }}
+          TOKEN: ${{ secrets.TOKEN }}
+          SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }}
+          DEVICE_ID: ${{ secrets.DEVICE_ID }}
+          USER_ID: ${{ secrets.USER_ID }}
+          LANGUAGE: ${{ secrets.LANGUAGE }}
+          U_TOKEN: ${{ secrets.U_TOKEN }}
+          HELP: ${{ secrets.HELP }}
 
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
 
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
+      - name: Install dependencies
+        run: node
+      - run: yarn
 
-    - name: Install dependencies
-      run: node
-    - run: yarn
-    
-    - name: Install dependencies
-      run: yarn add axios
-    
-    - run: node ./src/cron/checkin.js
-    - run: node ./src/cron/live.js
-    - run: node ./src/cron/luckydraw.js
-    - run: node ./src/cron/water.js
-    - run: node ./src/cron/boardgame.js
+      - name: Install dependencies
+        run: yarn add axios
 
+      - run: node ./src/cron/checkin.js
+      - run: node ./src/cron/live.js
+      - run: node ./src/cron/luckydraw.js
+      - run: node ./src/cron/water.js
+      - run: node ./src/cron/boardgame.js
