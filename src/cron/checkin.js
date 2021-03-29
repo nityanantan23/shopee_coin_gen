@@ -13,10 +13,10 @@ require("dotenv").config();
 (async () => {
   try {
     
-    const userId = steps.dotenv.outputs.USER_ID;
-    const language = steps.dotenv.outputs.LANGUAGE;
-    const shopeeToken = steps.dotenv.outputs.SHOPEE_TOKEN;
-    const name = steps.dotenv.outputs.NAME;
+    const userId = process.env.USER_ID;
+    const language = process.env.LANGUAGE;
+    const shopeeToken = process.env.SHOPEE_TOKEN;
+    const name = process.env.NAME;
 
     console.log(name);
 

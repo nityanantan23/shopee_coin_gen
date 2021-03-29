@@ -18,8 +18,17 @@ jobs:
  
     steps:
       
-    - name: Dotenv Action
-      uses: falti/dotenv-action@v0.2.5
+    - name: Run Action
+          uses: ./
+          env:
+            NAME: ${{ secrets.NAME }} 
+            TOKEN: ${{ secrets.TOKEN }} 
+            SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }} 
+            DEVICE_ID: ${{ secrets.DEVICE_ID }} 
+            USER_ID: ${{ secrets.USER_ID }} 
+            LANGUAGE: ${{ secrets.LANGUAGE }} 
+            U_TOKEN: ${{ secrets.U_TOKEN }} 
+            HELP: ${{ secrets.HELP }} 
 
 
     - uses: actions/checkout@v2
