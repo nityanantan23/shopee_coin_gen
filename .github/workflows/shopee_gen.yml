@@ -28,7 +28,6 @@ jobs:
         run: yarn add axios 
         
       - name: Run Action
-        uses: ./
         env:
           NAME: ${{ secrets.NAME }}
           TOKEN: ${{ secrets.TOKEN }}
