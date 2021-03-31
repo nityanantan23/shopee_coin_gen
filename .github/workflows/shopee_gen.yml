@@ -19,14 +19,6 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
     
-
-      - name: Install dependencies
-        run: node
-      - run: yarn
-
-      - name: Install dependencies
-        run: yarn add axios 
-
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
@@ -40,6 +32,15 @@ jobs:
           envkey_HELP: ${{ secrets.HELP }}
           directory: './'
           file_name: '.env'
+
+      - name: Install dependencies
+        run: node
+      - run: yarn
+
+      - name: Install dependencies
+        run: yarn add axios 
+
+     
                 
 
       - run: node ./src/cron/checkin.js
