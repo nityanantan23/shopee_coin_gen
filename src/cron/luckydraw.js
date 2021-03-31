@@ -6,9 +6,9 @@ const { userAgent } = require("../config");
 
 (async () => {
   try {
-    const userId = process.env.USER_ID;
-    const shopeeToken = process.env.SHOPEE_TOKEN;
-    const name = process.env.NAME;
+    const userId = process.env.envkey_USER_ID;
+    const shopeeToken = process.env.envkey_SHOPEE_TOKEN;
+    const name = process.env.envkey_NAME;
 
     const token = await account.getFeatureToggles({
       userId,

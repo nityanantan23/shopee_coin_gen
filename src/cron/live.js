@@ -15,10 +15,10 @@ const sleep = (ms) => {
 
 (async () => {
   try {
-    const userId = process.env.USER_ID;
-    const deviceId = process.env.DEVICE_ID;
-    const shopeeToken = process.env.SHOPEE_TOKEN;
-    const name = process.env.NAME;
+    const userId = process.env.envkey_USER_ID;
+    const deviceId = process.env.envkey_DEVICE_ID;
+    const shopeeToken = process.env.envkey_SHOPEE_TOKEN;
+    const name = process.env.envkey_NAME;
 
     const dt = new Date();
     const ts = dt.getTime();

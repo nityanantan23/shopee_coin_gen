@@ -3,31 +3,22 @@
 
 name: Shopee gen
 
-on:
-  schedule:
-    - cron: "0 */2 * * *"
-  watch:
-    types: [started]
+# on:
+  # schedule:
+  #   - cron: "0 */2 * * *"
+  # watch:
+  #   types: [started]
+on: push
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-     
-
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
-        env:
-          NAME: ${{ secrets.NAME }}
-          TOKEN: ${{ secrets.TOKEN }}
-          SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }}
-          DEVICE_ID: ${{ secrets.DEVICE_ID }}
-          USER_ID: ${{ secrets.USER_ID }}
-          LANGUAGE: ${{ secrets.LANGUAGE }}
-          U_TOKEN: ${{ secrets.U_TOKEN }}
-          HELP: ${{ secrets.HELP }}
+    
 
       - name: Install dependencies
         run: node
@@ -35,6 +26,18 @@ jobs:
 
       - name: Install dependencies
         run: yarn add axios 
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_NAME: ${{ secrets.NAME }}
+          envkey_TOKEN: ${{ secrets.TOKEN }}
+          envkey_SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }}
+          envkey_DEVICE_ID: ${{ secrets.DEVICE_ID }}
+          envkey_USER_ID: ${{ secrets.USER_ID }}
+          envkey_LANGUAGE: ${{ secrets.LANGUAGE }}
+          envkey_U_TOKEN: ${{ secrets.U_TOKEN }}
+          envkey_HELP: ${{ secrets.HELP }}
                 
 
       - run: node ./src/cron/checkin.js
