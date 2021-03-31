@@ -22,14 +22,14 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
-          INPUT_ENVKEY_NAME: ${{ secrets.NAME }}
-          INPUT_ENVKEY_TOKEN: ${{ secrets.TOKEN }}
-          INPUT_ENVKEY_SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }}
-          INPUT_ENVKEY_DEVICE_ID: ${{ secrets.DEVICE_ID }}
-          INPUT_ENVKEY_USER_ID: ${{ secrets.USER_ID }}
-          INPUT_ENVKEY_LANGUAGE: ${{ secrets.LANGUAGE }}
-          INPUT_ENVKEY_U_TOKEN: ${{ secrets.U_TOKEN }}
-          INPUT_ENVKEY_HELP: ${{ secrets.HELP }}
+          envkey_NAME: ${{ secrets.NAME }}
+          envkey_TOKEN: ${{ secrets.TOKEN }}
+          envkey_SHOPEE_TOKEN: ${{ secrets.SHOPEE_TOKEN }}
+          envkey_DEVICE_ID: ${{ secrets.DEVICE_ID }}
+          envkey_USER_ID: ${{ secrets.USER_ID }}
+          envkey_LANGUAGE: ${{ secrets.LANGUAGE }}
+          envkey_U_TOKEN: ${{ secrets.U_TOKEN }}
+          envkey_HELP: ${{ secrets.HELP }}
           directory: './'
           file_name: '.env'
           
