@@ -19,7 +19,7 @@ Simple node.js script to automate shopee coin mining.
 
 #### Add secrets to github action
 
-| Param        |                              Values                              |
+| Key          |                              Values                              |
 | ------------ | :--------------------------------------------------------------: |
 | NAME         |                         shopee username                          |
 | TOKEN        |                           SPC_EC token                           |
@@ -47,4 +47,4 @@ To find `shopeeToken` and `token` you can use `HTTPCanary` to capture shopee app
 
 `node ./src/cron/`[command_name]
 
-Github Action runs every 2 hours
+Github Action runs every 1 hour

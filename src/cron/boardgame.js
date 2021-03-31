@@ -1,4 +1,3 @@
-const fs = require("fs");
 const boardgame = require("../packages/boardgame");
 const account = require("../packages/account");
 const { userAgent, boardGameId } = require("../config");
