@@ -10,10 +10,10 @@ require("dotenv").config();
   try {
     const csrftoken = await purchase.getcsrf();
     const rollId = 31757;
-    const userId = process.env.envkey_USER_ID;
-    const deviceId = process.env.envkey_DEVICE_ID;
-    const shopeeToken = process.env.envkey_SHOPEE_TOKEN;
-    const name = process.env.envkey_NAME;
+    const userId = process.env.USER_ID;
+    const deviceId = process.env.DEVICE_ID;
+    const shopeeToken = process.env.SHOPEE_TOKEN;
+    const name = process.env.NAME;
 
     const token = await account.getFeatureToggles({
       shopeeToken,
