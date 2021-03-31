@@ -38,6 +38,8 @@ jobs:
           envkey_LANGUAGE: ${{ secrets.LANGUAGE }}
           envkey_U_TOKEN: ${{ secrets.U_TOKEN }}
           envkey_HELP: ${{ secrets.HELP }}
+          directory: './'
+          file_name: '.env'
                 
 
       - run: node ./src/cron/checkin.js
