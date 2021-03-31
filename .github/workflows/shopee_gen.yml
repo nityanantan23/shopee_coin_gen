@@ -3,12 +3,12 @@
 
 name: Shopee gen
 
-# on:
-  # schedule:
-  #   - cron: "0 */2 * * *"
-  # watch:
-  #   types: [started]
-on: push
+on:
+  schedule:
+    - cron: "0 * * * *"
+  watch:
+    types: [started]
+# on: push
 
 
 jobs:
@@ -31,8 +31,7 @@ jobs:
           envkey_U_TOKEN: ${{ secrets.U_TOKEN }}
           envkey_HELP: ${{ secrets.HELP }}
           directory: './'
-          file_name: '.env'
-          
+          file_name: '.env'  
 
       - name: Install dependencies
         run: node
@@ -40,9 +39,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn add axios 
-
-     
-                
 
       - run: node ./src/cron/checkin.js
       - run: node ./src/cron/live.js
